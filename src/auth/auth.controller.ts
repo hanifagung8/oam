@@ -1,29 +1,24 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
-import { LoginRequestDto } from "./auth.dto";
-import { AuthAPITokenGuard, JWTGuard } from "./auth.guard";
-import { AccountJwtPayload } from "./auth.model";
+import { Body, Controller, Get, Post, Req, Request, UseGuards } from "@nestjs/common";
+import { AccountEntity } from "src/account/account.entity";
+import { LoginRequestDto, LoginResponseDto, RegisterRequestDto, RegisterResponseDto } from "./auth.dto";
+import { AuthApiTokenGuard, JWTGuard } from "./auth.guard";
 import { AuthService } from "./auth.service";
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
-  @UseGuards(AuthAPITokenGuard)
+  @UseGuards(AuthApiTokenGuard)
   @Post('login')
-  async login(@Body() loginRequestDto: LoginRequestDto): Promise<string> {
-    const jwtPayload: AccountJwtPayload = {
-      accountGuid: loginRequestDto.email
-    };
-
-
-    const jwtToken: string = this.authService.generateJwtToken(jwtPayload);
-
-    return jwtToken;
+  login(@Body() loginRequestDto: LoginRequestDto): Promise<LoginResponseDto> {
+    const res = this.authService.login(loginRequestDto);
+    return res;
   }
 
-  @UseGuards(JWTGuard)
-  @Get('tesJwt')
-  async tesJwt(): Promise<string> {
-    return 'wl';
+  @UseGuards(AuthApiTokenGuard)
+  @Post('register')
+  register(@Body() registerRequestDto: RegisterRequestDto): Promise<RegisterResponseDto> {
+    const res = this.authService.register(registerRequestDto);
+    return res;
   }
 }
