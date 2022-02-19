@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "ec2-54-157-160-218.compute-1.amazonaws.com",
   "port": 5432,
-  "username": "postgres",
-  "password": "postgres",
-  "database": "oamlocalhanif",
+  "username": "fcogeamdmibkyt",
+  "password": "67188d8bcbedcfad3a9dd8c8c267ec93feec023ad068b164190e8b7c10436b32",
+  "database": "dfsujd6kuccfsp",
   "entities": [
     "dist/**/*.entity.js"
   ],
