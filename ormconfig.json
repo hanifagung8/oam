@@ -14,7 +14,7 @@
   "cli": {
     "migrationsDir": "migration"
   },
-  "extra": {
-    "ssl": true
+  "ssl": {
+    "rejectUnauthorized": false
   }
 }
